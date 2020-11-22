@@ -9,6 +9,7 @@ class BankAccount
   end
 
   def withdraw(amount)
+    raise "Balance is insufficient. Current balance: #{@balance}" if @balance < amount
     @balance -= amount
   end
 
