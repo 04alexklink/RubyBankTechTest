@@ -9,7 +9,7 @@ class BankAccount
   end
 
   def withdraw(amount)
-    raise "Balance is insufficient. Current balance: #{@balance}" if withdrawal_check(@balance, amount)
+    raise "Balance is insufficient. Current balance: #{@balance}" if insufficient_funds_check(@balance, amount)
     @balance -= amount
   end
 
@@ -19,7 +19,7 @@ class BankAccount
 
   private
 
-  def withdrawal_check(balance, amount)
+  def insufficient_funds_check(balance, amount)
     (balance < amount)
   end 
 
