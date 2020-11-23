@@ -1,13 +1,23 @@
 class BankAccount
+
   def initialize
-    @transactions = ["date || credit || debit || balance"]
+    @transactions = []
+    @balance = 0
   end
+
   def deposit(amount, date)
-    @transactions.push("#{date} || #{amount}.00 || || #{amount}.00  " )
+    @balance += amount
+    @transactions.push("#{date} || #{amount}.00 || || #{@balance}.00 ")
+  end
+
+  def withdraw(amount, date)
+    @balance -= amount
+    @transactions.push("#{date} || || #{amount}.00 || #{@balance}.00 ")
   end
 
   def print_statement
-    @transactions.join("\n")
+    header = "date || credit || debit || balance"
+    @transactions.reverse.unshift(header).join("\n")
   end
 
 end
