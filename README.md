@@ -34,11 +34,11 @@ So that I can use my account,
 I'd like to be able to make a withdrawal
 
 As a bank customer,
-So that I can use my account,
+So that each transaction is recorded,
 I'd like to be able to store my transactions
 
 As a bank customer,
-So that I can use my account,
+So that I can see my transaction history,
 I'd like to print my account statement
 
 -- Can only make a withdrawal if my account balance is greater than requested withdrawal amount
