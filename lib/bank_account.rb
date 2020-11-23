@@ -6,15 +6,13 @@ class BankAccount
   end
 
   def deposit(amount, date)
-    raise "Invalid entry for withdrawal amount" if invalid_string_input?(amount)
-    raise "Invalid entry for withdrawal amount" if negative_amount_inputted?(amount)
+    raise "Invalid entry for deposit amount" if (invalid_string_input?(amount)) || (negative_amount_inputted?(amount))
     @balance += amount
     @transactions.push("#{date} || #{amount}.00 || || #{@balance}.00 ")
   end
 
   def withdraw(amount, date)
-    raise "Invalid entry for withdrawal amount" if invalid_string_input?(amount)
-    raise "Invalid entry for withdrawal amount" if negative_amount_inputted?(amount)
+    raise "Invalid entry for withdrawal amount" if (invalid_string_input?(amount)) || (negative_amount_inputted?(amount))
     raise "Insufficient funds" if insufficient_funds?(amount)
     @balance -= amount
     @transactions.push("#{date} || || #{amount}.00 || #{@balance}.00 ")

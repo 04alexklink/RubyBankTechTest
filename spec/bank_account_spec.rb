@@ -13,8 +13,8 @@ describe "BankAccount" do
         expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n23/11/2020 || 500.00 || || 500.00 ")
     end
     it "does not accept negative numbers or string input for amount" do
-      expect { bankaccount.deposit("500", "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
-      expect { bankaccount.deposit(-500, "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
+      expect { bankaccount.deposit("500", "23/11/2020") }.to raise_error("Invalid entry for deposit amount")
+      expect { bankaccount.deposit(-500, "23/11/2020") }.to raise_error("Invalid entry for deposit amount")
     end
   end
   describe "#withdraw" do
@@ -31,6 +31,16 @@ describe "BankAccount" do
       bankaccount.deposit(1000, "23/11/2020")
       expect { bankaccount.withdraw("500", "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
       expect { bankaccount.withdraw(-500, "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
+    end
+  end
+  describe "#print_statement" do
+    it "prints only the statement header 'date || credit || debit || balance' if called without a previous transaction" do
+      expect(bankaccount.print_statement).to eq("date || credit || debit || balance")
+    end
+    it "prints transactions in order of most recent first" do
+      bankaccount.deposit(500, "22/11/2020")
+      bankaccount.withdraw(200, "23/11/2020")
+      expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n23/11/2020 || || 200.00 || 300.00 \n22/11/2020 || 500.00 || || 500.00 ")
     end
   end
 end
