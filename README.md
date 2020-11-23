@@ -41,5 +41,14 @@ As a bank customer,
 So that I can see my transaction history,
 I'd like to print my account statement
 
+ASSUMPTIONS:
 -- Can only make a withdrawal if my account balance is greater than requested withdrawal amount
 -- Get an error message telling me my requested withdrawal amount is greater than my balance, and tells me what amount i can withdraw
+
+DIAGRAMS/EXPLANATION OF CLASSES:
+
+INSTALLATION INSTRUCTIONS:
+
+TESTING INSTRUCTIONS:
+
+SCREENSHOT OF INTERACTION IN IRB:
