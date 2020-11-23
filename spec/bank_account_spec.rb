@@ -4,20 +4,9 @@ describe "BankAccount" do
   let(:bankaccount) { BankAccount.new}
 
   describe "#deposit" do
-    it "increases bankaccount balance by 1000 when passed 1000 as an argument" do
+    it "knows that 1000 has been deposited " do
       bankaccount.deposit(1000)
-      expect(bankaccount.show_balance).to eq(1000)
-    end
-  end
-  describe "#withdraw" do 
-    it "decreases bankaccount balance by amount passed in as an argument" do
-      bankaccount.deposit(1000)
-      bankaccount.withdraw(500)
-      expect(bankaccount.show_balance).to eq(500)
-    end
-    it "raises an error if withdrawal amount > current bankaccount balance" do
-      expect { bankaccount.withdraw(50) }.to raise_error("Balance is insufficient. Current balance: 0")
-      expect(bankaccount.show_balance).to eq(0)
+      expect(bankaccount.print_statement).to eq("date || credit || debit || balance /n 23/11/2020 || 1000.00 || || 1000.00 ")
     end
   end
 end
