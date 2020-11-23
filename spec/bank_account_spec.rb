@@ -12,6 +12,10 @@ describe "BankAccount" do
         bankaccount.deposit(500, "23/11/2020")
         expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n23/11/2020 || 500.00 || || 500.00 ")
     end
+    it "does not accept negative numbers or string input for amount" do
+      expect { bankaccount.deposit("500", "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
+      expect { bankaccount.deposit(-500, "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
+    end
   end
   describe "#withdraw" do
     it "knows that 500 has been withdrawn" do
