@@ -1,10 +1,13 @@
 class BankAccount
-
-  def deposit(amount)
+  def initialize
+    @transactions = ["date || credit || debit || balance"]
+  end
+  def deposit(amount, date)
+    @transactions.push("#{date} || #{amount}.00 || || #{amount}.00  " )
   end
 
   def print_statement
-    "date || credit || debit || balance /n 23/11/2020 || 1000.00 || || 1000.00 "
+    @transactions.join("\n")
   end
 
 end
