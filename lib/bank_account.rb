@@ -11,7 +11,7 @@ class BankAccount
   end
 
   def withdraw(amount, date)
-    raise "Insufficient funds" if amount > @balance
+    raise "Insufficient funds" if insufficient_funds?(amount)
     @balance -= amount
     @transactions.push("#{date} || || #{amount}.00 || #{@balance}.00 ")
   end
@@ -19,6 +19,11 @@ class BankAccount
   def print_statement
     header = "date || credit || debit || balance"
     @transactions.reverse.unshift(header).join("\n")
+  end
+
+  private 
+  def insufficient_funds?(amount)
+    amount > @balance
   end
 
 end
