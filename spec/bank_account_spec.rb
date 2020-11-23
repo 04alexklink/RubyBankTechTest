@@ -1,7 +1,7 @@
 require '../lib/bank_account'
 
 describe "BankAccount" do
-  let(:bankaccount) { BankAccount.new}
+  let(:bankaccount) { BankAccount.new }
 
   describe "#deposit" do
     it "knows that 1000 has been deposited " do
