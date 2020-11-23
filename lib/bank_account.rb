@@ -11,6 +11,7 @@ class BankAccount
   end
 
   def withdraw(amount, date)
+    raise "Invalid entry for withdrawal amount" if amount.class == String
     raise "Insufficient funds" if insufficient_funds?(amount)
     @balance -= amount
     @transactions.push("#{date} || || #{amount}.00 || #{@balance}.00 ")
