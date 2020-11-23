@@ -23,8 +23,10 @@ describe "BankAccount" do
       expect { bankaccount.withdraw(500, "23/11/2020") }.to raise_error("Insufficient funds")
       expect(bankaccount.print_statement).to eq("date || credit || debit || balance")
     end 
-    it "only takes in a positive number with up to 2 decimal places" do
+    it "does not accept negative numbers or string input for amount" do
+      bankaccount.deposit(1000, "23/11/2020")
       expect { bankaccount.withdraw("500", "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
+      expect { bankaccount.withdraw(-500, "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
     end
   end
 end

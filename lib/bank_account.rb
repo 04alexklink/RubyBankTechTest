@@ -11,7 +11,8 @@ class BankAccount
   end
 
   def withdraw(amount, date)
-    raise "Invalid entry for withdrawal amount" if amount.class == String
+    raise "Invalid entry for withdrawal amount" if invalid_string_input?(amount)
+    raise "Invalid entry for withdrawal amount" if negative_amount_inputted?(amount)
     raise "Insufficient funds" if insufficient_funds?(amount)
     @balance -= amount
     @transactions.push("#{date} || || #{amount}.00 || #{@balance}.00 ")
@@ -23,8 +24,17 @@ class BankAccount
   end
 
   private 
+
   def insufficient_funds?(amount)
     amount > @balance
+  end
+
+  def negative_amount_inputted?(amount)
+    amount.negative?
+  end
+
+  def invalid_string_input?(amount)
+    amount.class == String
   end
 
 end
