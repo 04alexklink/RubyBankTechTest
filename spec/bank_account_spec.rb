@@ -19,5 +19,9 @@ describe "BankAccount" do
       bankaccount.withdraw(500, "23/11/2020")
       expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n23/11/2020 || || 500.00 || 500.00 \n23/11/2020 || 1000.00 || || 1000.00 ")
     end
+    it "raises error message if withdrawal amount exceeds bankaccount balance" do
+      expect { bankaccount.withdraw(500, "23/11/2020") }.to raise_error("Insufficient funds")
+      expect(bankaccount.print_statement).to eq("date || credit || debit || balance")
+    end 
   end
 end
