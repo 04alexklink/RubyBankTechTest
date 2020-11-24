@@ -22,20 +22,24 @@ class BankAccount
 
   def print_statement
     header = "date || credit || debit || balance"
-    statement_body = statement_formatter
+    statement_body = transaction_formatter
     statement_body.reverse.unshift(header).join("\n")
   end
 
   private 
 
-  def statement_formatter
+  def transaction_formatter
     @transactions.map do |transaction|
       if transaction[:type] == "deposit"
-        "#{transaction[:date]} || #{transaction[:amount]}.00 || || #{transaction[:balance]}.00 "
+        "#{transaction[:date]} || #{format_to_2dp(transaction[:amount])} || || #{format_to_2dp(transaction[:balance])} "
       else transaction[:type] == "withdrawal"
-        "#{transaction[:date]} || || #{transaction[:amount]}.00 || #{transaction[:balance]}.00 "
+        "#{transaction[:date]} || || #{format_to_2dp(transaction[:amount])} || #{format_to_2dp(transaction[:balance])} "
       end
     end
+  end
+
+  def format_to_2dp(number)
+    sprintf("%0.2f", number)
   end
 
   def add_transaction(date, type, amount) 
