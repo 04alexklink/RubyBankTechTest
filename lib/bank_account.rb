@@ -27,12 +27,8 @@ class BankAccount
 
   private 
 
-  def add_transaction(date, type, amount)
-    if type == "deposit" 
-      transaction = "#{date} || #{amount}.00 || || #{@balance}.00 "
-    else type == "withdrawal"
-      transaction = "#{date} || || #{amount}.00 || #{@balance}.00 "
-    end
+  def add_transaction(date, type, amount) 
+      transaction = {date: date, type: type, amount: amount, balance: @balance}
     @transactions.push(transaction)
   end
 
