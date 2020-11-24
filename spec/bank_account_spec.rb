@@ -2,7 +2,7 @@ require '../lib/bank_account'
 
 describe "BankAccount" do
   let(:bankaccount) { BankAccount.new }
-  # let(:timenow) {Time.now}
+  let(:timenow) { Time.now}
   describe "#deposit" do
     it "knows that 1000 has been deposited " do
       bankaccount.deposit(1000, "23/11/2020")
