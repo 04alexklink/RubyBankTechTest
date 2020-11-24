@@ -22,13 +22,20 @@ class BankAccount
 
   def print_statement
     header = "date || credit || debit || balance"
-    @transactions.reverse.unshift(header).join("\n")
+    transaction_format = @transactions.map do |transaction|
+      if transaction[:type] == "deposit"
+        "#{transaction[:date]} || #{transaction[:amount]}.00 || || #{transaction[:balance]}.00 "
+      else transaction[:type] == "withdrawal"
+        "#{transaction[:date]} || || #{transaction[:amount]}.00 || #{transaction[:balance]}.00 "
+      end
+    end
+    transaction_format.reverse.unshift(header).join("\n")
   end
 
   private 
 
   def add_transaction(date, type, amount) 
-      transaction = {date: date, type: type, amount: amount, balance: @balance}
+    transaction = {date: date, type: type, amount: amount, balance: @balance}
     @transactions.push(transaction)
   end
 
