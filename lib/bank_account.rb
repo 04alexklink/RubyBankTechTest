@@ -45,7 +45,6 @@ class BankAccount
 
   def add_transaction(date, type, amount) 
     transaction = Transaction.new(date, type, amount, @balance)
-    p transaction
     @transactions.push(transaction)
   end
 
