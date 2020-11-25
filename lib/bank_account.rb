@@ -1,9 +1,9 @@
-require_relative 'transaction'
 class BankAccount
 
-  def initialize
+  def initialize(statement = Statement.new)
     @transactions = []
     @balance = 0
+    @statement = statement
   end
 
   def deposit(amount, date)
@@ -22,26 +22,10 @@ class BankAccount
   end
 
   def print_statement
-    header = "date || credit || debit || balance"
-    statement_body = transaction_formatter
-    statement_body.reverse.unshift(header).join("\n")
+    @statement.print_statement(@transactions)
   end
 
   private 
-
-  def transaction_formatter
-    @transactions.map do |transaction|
-      if transaction.content[:type] == "deposit"
-        "#{transaction.content[:date]} || #{format_to_2dp(transaction.content[:amount])} || || #{format_to_2dp(transaction.content[:balance])} "
-      else transaction.content[:type] == "withdrawal"
-        "#{transaction.content[:date]} || || #{format_to_2dp(transaction.content[:amount])} || #{format_to_2dp(transaction.content[:balance])} "
-      end
-    end
-  end
-
-  def format_to_2dp(number)
-    sprintf("%0.2f", number)
-  end
 
   def add_transaction(date, type, amount) 
     transaction = Transaction.new(date, type, amount, @balance)
