@@ -1,9 +1,12 @@
 class Statement
 
+  def initialize
+    @statement_header = "date || credit || debit || balance"
+  end
+
   def print_statement(transactions_array)
-    statement_header = "date || credit || debit || balance"
     statement_body = transactions_formatter(transactions_array)
-    statement_body.reverse.unshift(statement_header).join("\n")
+    statement_body.reverse.unshift(@statement_header).join("\n")
   end
 
   private 
