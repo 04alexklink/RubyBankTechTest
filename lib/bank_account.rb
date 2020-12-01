@@ -1,4 +1,8 @@
 class BankAccount
+
+  DEPOSIT = "deposit"
+  WITHDRAWAL = "withdrawal"
+
   def initialize(statement = Statement.new, transaction_class = Transaction)
     @transactions = []
     @balance = 0
@@ -7,20 +11,16 @@ class BankAccount
   end
 
   def deposit(amount, date)
-    p amount.is_a? Numeric
-    p "Hello"
     raise "Invalid entry for deposit amount" if not_a_positive_number?(amount)
     @balance += amount
-    type = "deposit"
-    add_transaction(date, type, amount)
+    add_transaction(date, DEPOSIT, amount)
   end
 
   def withdraw(amount, date)
     raise "Invalid entry for withdrawal amount" if not_a_positive_number?(amount)
     raise "Insufficient funds" if insufficient_funds?(amount)
     @balance -= amount
-    type = "withdrawal"
-    add_transaction(date, type, amount)
+    add_transaction(date, WITHDRAWAL, amount)
   end
 
   def print_statement
