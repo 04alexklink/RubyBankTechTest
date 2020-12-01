@@ -15,8 +15,7 @@ class Statement
     transactions.reverse.map do |transaction|
       if transaction.type == "deposit"
         "#{transaction.date} || #{format_to_2dp(transaction.amount)} || || #{format_to_2dp(transaction.balance)} "
-      else transaction.type == "withdrawal"
-        "#{transaction.date} || || #{format_to_2dp(transaction.amount)} || #{format_to_2dp(transaction.balance)} "
+      else "#{transaction.date} || || #{format_to_2dp(transaction.amount)} || #{format_to_2dp(transaction.balance)} "
       end
     end
   end
