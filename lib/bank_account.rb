@@ -1,5 +1,4 @@
 class BankAccount
-
   def initialize(statement = Statement.new, transaction_class = Transaction)
     @transactions = []
     @balance = 0
