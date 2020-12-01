@@ -1,9 +1,10 @@
 class BankAccount
 
-  def initialize(statement = Statement.new)
+  def initialize(statement = Statement.new, transaction_class = Transaction)
     @transactions = []
     @balance = 0
     @statement = statement
+    @transaction_class = transaction_class
   end
 
   def deposit(amount, date)
@@ -28,7 +29,7 @@ class BankAccount
   private 
 
   def add_transaction(date, type, amount) 
-    transaction = Transaction.new(date, type, amount, @balance)
+    transaction = @transaction_class.new(date, type, amount, @balance)
     @transactions.push(transaction)
   end
 
