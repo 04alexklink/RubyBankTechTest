@@ -1,7 +1,7 @@
 require '../lib/bank_account'
 
 describe "BankAccount" do
-  let(:statement) { double :statement}
+  let(:statement) { double :statement }
   let(:bankaccount) { BankAccount.new(statement, transaction_class_double) }
   let(:transaction_double) { double :transaction}
   let(:transaction_class_double) { double :transaction_class, new: transaction_double }

@@ -2,8 +2,8 @@ require '../lib/statement'
 
 describe "Statement" do
   let(:statement) { Statement.new }
-  let(:transaction1) { double :transaction, content: {date: "25/11/2020", type: "deposit", amount: 100, balance: 100} }
-  let(:transaction2) { double :transaction, content: {date: "25/11/2020", type: "withdrawal", amount: 50, balance: 50} }
+  let(:transaction1) { double :transaction, date: "25/11/2020", type: "deposit", amount: 100, balance: 100 }
+  let(:transaction2) { double :transaction, date: "25/11/2020", type: "withdrawal", amount: 50, balance: 50 }
 
   describe "print_statement" do
     it "takes an array of transaction objects as an argument and prints them in a structured format with header first" do
