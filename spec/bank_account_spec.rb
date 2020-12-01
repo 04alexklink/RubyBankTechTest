@@ -18,9 +18,10 @@ describe "BankAccount" do
       allow(statement_double).to receive(:print_statement).with([transaction_double]).and_return("date || credit || debit || balance\n23/11/2020 || 500.00 || || 500.00 ")
       expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n23/11/2020 || 500.00 || || 500.00 ")
     end
-    it "does not accept negative numbers or string input for amount" do
+    it "only accepts positive numbers as amounts" do
       expect { bankaccount.deposit("500", "23/11/2020") }.to raise_error("Invalid entry for deposit amount")
       expect { bankaccount.deposit(-500, "23/11/2020") }.to raise_error("Invalid entry for deposit amount")
+      expect { bankaccount.deposit([1,"2",3], "23/11/2020") }.to raise_error("Invalid entry for deposit amount")
     end
   end
   describe "#withdraw" do
@@ -35,10 +36,11 @@ describe "BankAccount" do
     it "raises error message if withdrawal amount exceeds bankaccount balance" do
       expect { bankaccount.withdraw(500, "23/11/2020") }.to raise_error("Insufficient funds")
     end 
-    it "does not accept negative numbers or string input for amount" do
+    it "only accepts positive numbers as amounts" do
       bankaccount.deposit(1000, "23/11/2020")
       expect { bankaccount.withdraw("500", "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
       expect { bankaccount.withdraw(-500, "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
+      expect { bankaccount.withdraw([1,"2",3], "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
     end
   end
 end
