@@ -1,4 +1,4 @@
-require '../lib/transaction'
+require 'transaction'
 
 describe "Transaction" do
   it "takes date, type, amount and balance parameters and stores them as properties" do
