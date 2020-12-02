@@ -1,3 +1,6 @@
+require_relative 'statement'
+require_relative 'transaction'
+
 class BankAccount
 
   DEPOSIT = "deposit"
