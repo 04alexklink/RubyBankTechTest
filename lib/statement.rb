@@ -1,5 +1,4 @@
 class Statement
-
   def initialize
     @statement_header = ["date || credit || debit || balance"]
   end
@@ -21,7 +20,6 @@ class Statement
   end
 
   def format_to_2dp(number)
-    sprintf("%0.2f", number)
+    format("%0.2f", number)
   end
-
 end

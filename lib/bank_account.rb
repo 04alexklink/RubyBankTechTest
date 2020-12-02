@@ -2,9 +2,8 @@ require_relative 'statement'
 require_relative 'transaction'
 
 class BankAccount
-
-  DEPOSIT = "deposit"
-  WITHDRAWAL = "withdrawal"
+  DEPOSIT = "deposit".freeze
+  WITHDRAWAL = "withdrawal".freeze
 
   def initialize(statement = Statement.new, transaction_class = Transaction)
     @transactions = []
@@ -15,13 +14,16 @@ class BankAccount
 
   def deposit(amount, date)
     raise "Invalid entry for deposit amount" if not_a_positive_number?(amount)
+
     @balance += amount
     add_transaction(date, DEPOSIT, amount)
   end
 
   def withdraw(amount, date)
     raise "Invalid entry for withdrawal amount" if not_a_positive_number?(amount)
+
     raise "Insufficient funds" if insufficient_funds?(amount)
+
     @balance -= amount
     add_transaction(date, WITHDRAWAL, amount)
   end
@@ -42,7 +44,6 @@ class BankAccount
   end
 
   def not_a_positive_number?(amount)
-    !((amount.is_a? Numeric) && (amount.positive?))
+    !((amount.is_a? Numeric) && amount.positive?)
   end
-
 end
