@@ -3,37 +3,14 @@ require 'statement'
 require 'transaction'
 
 describe "BankAccount" do
-  
-  let(:bankaccount) { BankAccount.new }
-  describe "#deposit" do
-    it "knows that 1000 has been deposited " do
-      bankaccount.deposit(1000, "23/11/2020")
-      expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n23/11/2020 || 1000.00 || || 1000.00 ")
-    end
-    it "knows that 500 has been deposited " do
-      bankaccount.deposit(500, "23/11/2020")
-      expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n23/11/2020 || 500.00 || || 500.00 ")
-    end
-    it "only accepts positive numbers as amounts" do
-      expect { bankaccount.deposit("500", "23/11/2020") }.to raise_error("Invalid entry for deposit amount")
-      expect { bankaccount.deposit(-500, "23/11/2020") }.to raise_error("Invalid entry for deposit amount")
-      expect { bankaccount.deposit([1,"2",3], "23/11/2020") }.to raise_error("Invalid entry for deposit amount")
-    end
-  end
-  describe "#withdraw" do
-    it "knows that 500 has been withdrawn" do
-      bankaccount.deposit(1000, "23/11/2020")
-      bankaccount.withdraw(500, "23/11/2020")
-      expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n23/11/2020 || || 500.00 || 500.00 \n23/11/2020 || 1000.00 || || 1000.00 ")
-    end
-    it "raises error message if withdrawal amount exceeds bankaccount balance" do
-      expect { bankaccount.withdraw(500, "23/11/2020") }.to raise_error("Insufficient funds")
-    end 
-    it "only accepts positive numbers as amounts" do
-      bankaccount.deposit(1000, "23/11/2020")
-      expect { bankaccount.withdraw("500", "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
-      expect { bankaccount.withdraw(-500, "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
-      expect { bankaccount.withdraw([1,"2",3], "23/11/2020") }.to raise_error("Invalid entry for withdrawal amount")
-    end
+  let(:time1) { Time.now }
+  let(:time2) { Time.now + 24*60*60 }
+  it "accepts withdrawals and deposits and prints out formatted statement" do 
+    bankaccount = BankAccount.new
+    allow(Time).to receive(:now).and_return(time1)
+    bankaccount.deposit(1000)
+    allow(Time).to receive(:now).and_return(time2)
+    bankaccount.withdraw(500)
+    expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n#{time2.strftime("%d/%m/%Y")} || || 500.00 || 500.00 \n#{time1.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00 ")
   end
 end

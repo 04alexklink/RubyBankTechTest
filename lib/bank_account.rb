@@ -12,20 +12,20 @@ class BankAccount
     @transaction_class = transaction_class
   end
 
-  def deposit(amount, date)
+  def deposit(amount)
     raise "Invalid entry for deposit amount" if not_a_positive_number?(amount)
 
     @balance += amount
-    add_transaction(date, DEPOSIT, amount)
+    add_transaction(DEPOSIT, amount)
   end
 
-  def withdraw(amount, date)
+  def withdraw(amount)
     raise "Invalid entry for withdrawal amount" if not_a_positive_number?(amount)
 
     raise "Insufficient funds" if insufficient_funds?(amount)
 
     @balance -= amount
-    add_transaction(date, WITHDRAWAL, amount)
+    add_transaction(WITHDRAWAL, amount)
   end
 
   def print_statement
@@ -34,8 +34,8 @@ class BankAccount
 
   private 
 
-  def add_transaction(date, type, amount) 
-    transaction = @transaction_class.new(date, type, amount, @balance)
+  def add_transaction(type, amount) 
+    transaction = @transaction_class.new(Time.now, type, amount, @balance)
     @transactions.push(transaction)
   end
 

@@ -13,13 +13,17 @@ class Statement
   def transactions_formatter(transactions)
     transactions.reverse.map do |transaction|
       if transaction.type == "deposit"
-        "#{transaction.date} || #{format_to_2dp(transaction.amount)} || || #{format_to_2dp(transaction.balance)} "
-      else "#{transaction.date} || || #{format_to_2dp(transaction.amount)} || #{format_to_2dp(transaction.balance)} "
+        "#{format_date(transaction.date)} || #{format_to_2dp(transaction.amount)} || || #{format_to_2dp(transaction.balance)} "
+      else "#{format_date(transaction.date)} || || #{format_to_2dp(transaction.amount)} || #{format_to_2dp(transaction.balance)} "
       end
     end
   end
 
   def format_to_2dp(number)
     format("%0.2f", number)
+  end
+
+  def format_date(date)
+    date.strftime("%d/%m/%Y")
   end
 end

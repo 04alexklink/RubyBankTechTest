@@ -25,6 +25,12 @@ Layout/TrailingEmptyLines:
 Layout/EndOfLine:
   Enabled: false
 
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Layout/SpaceAroundOperators:
+  Enabled: false
+
 AllCops:
   Exclude:
     - 'spec/spec_helper.rb'
