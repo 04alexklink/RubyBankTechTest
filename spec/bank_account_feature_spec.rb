@@ -11,6 +11,6 @@ describe "BankAccount" do
     bankaccount.deposit(1000)
     allow(Time).to receive(:now).and_return(time2)
     bankaccount.withdraw(500)
-    expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n#{time2.strftime("%d/%m/%Y")} || || 500.00 || 500.00 \n#{time1.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00 ")
+    expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n#{time2.strftime("%d/%m/%Y")} || || 500.00 || 500.00\n#{time1.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00")
   end
 end

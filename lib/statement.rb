@@ -4,8 +4,8 @@ class Statement
   end
 
   def print_statement(transactions_array)
-    statement_body = transactions_formatter(transactions_array)
-    @statement_header.push(statement_body).join("\n")
+    transactions_formatter(transactions_array)
+    @statement_header.join("\n")
   end
 
   private 
@@ -13,8 +13,9 @@ class Statement
   def transactions_formatter(transactions)
     transactions.reverse.map do |transaction|
       if transaction.type == "deposit"
-        "#{format_date(transaction.date)} || #{format_to_2dp(transaction.amount)} || || #{format_to_2dp(transaction.balance)} "
-      else "#{format_date(transaction.date)} || || #{format_to_2dp(transaction.amount)} || #{format_to_2dp(transaction.balance)} "
+        @statement_header.push("#{format_date(transaction.date)} || #{format_to_2dp(transaction.amount)} || || #{format_to_2dp(transaction.balance)}")
+      elsif transaction.type == "withdrawal"
+        @statement_header.push("#{format_date(transaction.date)} || || #{format_to_2dp(transaction.amount)} || #{format_to_2dp(transaction.balance)}")
       end
     end
   end

@@ -9,10 +9,10 @@ describe 'Statement' do
 
   describe 'print_statement' do
     it 'takes an array of transaction objects as an argument and prints them in a structured format with header first' do
-      expect(statement.print_statement([transaction1])).to eq("date || credit || debit || balance\n#{time1.strftime("%d/%m/%Y")} || 100.00 || || 100.00 ")
+      expect(statement.print_statement([transaction1])).to eq("date || credit || debit || balance\n#{time1.strftime("%d/%m/%Y")} || 100.00 || || 100.00")
     end
     it 'formats deposits and withdrawals in correct columns and prints transactions in order of most recent first' do
-      expect(statement.print_statement([transaction1, transaction2])).to eq("date || credit || debit || balance\n#{time2.strftime("%d/%m/%Y")} || || 50.00 || 50.00 \n#{time1.strftime("%d/%m/%Y")} || 100.00 || || 100.00 ")
+      expect(statement.print_statement([transaction1, transaction2])).to eq("date || credit || debit || balance\n#{time2.strftime("%d/%m/%Y")} || || 50.00 || 50.00\n#{time1.strftime("%d/%m/%Y")} || 100.00 || || 100.00")
     end
   end
 end
