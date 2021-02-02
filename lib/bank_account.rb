@@ -29,7 +29,7 @@ class BankAccount
   end
 
   def print_statement
-    return @statement.print_statement(@transactions)
+    print @statement.print_statement(@transactions)
   end
 
   private 

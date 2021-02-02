@@ -13,7 +13,7 @@ describe 'BankAccount' do
       expect(transaction_class_double).to receive(:new).with(time1, 'deposit', 1000, 1000)
       bankaccount.deposit(1000)
       allow(statement_double).to receive(:print_statement).with([transaction_double]).and_return("date || credit || debit || balance\n#{time1.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00")
-      expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n#{time1.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00")
+      expect { bankaccount.print_statement }.to output("date || credit || debit || balance\n#{time1.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00").to_stdout
     end
     it 'only accepts positive numbers as amounts' do
       expect { bankaccount.deposit('500') }.to raise_error('Invalid entry for deposit amount')
@@ -30,7 +30,7 @@ describe 'BankAccount' do
       expect(transaction_class_double).to receive(:new).with(time2, 'withdrawal', 500, 500)
       bankaccount.withdraw(500)
       allow(statement_double).to receive(:print_statement).with([transaction_double, transaction_double]).and_return("date || credit || debit || balance\n#{time2.strftime("%d/%m/%Y")} || || 500.00 || 500.00\n#{time1.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00")
-      expect(bankaccount.print_statement).to eq("date || credit || debit || balance\n#{time2.strftime("%d/%m/%Y")} || || 500.00 || 500.00\n#{time1.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00")
+      expect { bankaccount.print_statement }.to output("date || credit || debit || balance\n#{time2.strftime("%d/%m/%Y")} || || 500.00 || 500.00\n#{time1.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00").to_stdout
     end
     it 'raises error message if withdrawal amount exceeds bankaccount balance' do
       expect { bankaccount.withdraw(500) }.to raise_error('Insufficient funds')
