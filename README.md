@@ -35,8 +35,8 @@ I'd like to be able to print my account statement
 ```
 
 **Assumptions That I Made:**
--- No overdraft: Can only make a withdrawal if my account balance is greater than requested withdrawal amount.
--- When opening a bank account: There isn't the option to transfer bank balance from another account, so starting balance is always 0.
+- No overdraft: Can only make a withdrawal if my account balance is greater than requested withdrawal amount.
+- When opening a bank account: There isn't the option to transfer bank balance from another account, so starting balance is always 0.
 
 **Edge Cases:**
 - Amount inputted to withdraw and deposit cannot be strings or negative numbers(User input is of the correct type)
